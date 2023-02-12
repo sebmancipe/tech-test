@@ -6,6 +6,8 @@ import { unlinkSync } from "fs";
 
 export function convertToText(fileService: FileService = resolveFileService()): ExpressRouteFunc {
     return async function (req: Request, res: Response): Promise<any> {
+        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+
         if(req.file){
             try {
                 const text = await fileService.toText(req.file.path);
