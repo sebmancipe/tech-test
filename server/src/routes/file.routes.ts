@@ -2,20 +2,23 @@ import { Request, Response } from "express";
 import { ExpressRouteFunc } from "../routes";
 import { resolveFileService } from "./../common/injector";
 import { FileService } from "../services";
+import { unlinkSync } from "fs";
 
 export function convertToText(fileService: FileService = resolveFileService()): ExpressRouteFunc {
     return async function (req: Request, res: Response): Promise<any> {
-        try {
-            const text = await fileService.toText('path-to-file');
+        if(req.file){
+            try {
+                const text = await fileService.toText(req.file.path);
 
-            res.json({ 
-                data: text
-            });
-        } catch (e) {
-            console.log(e);
-
+                unlinkSync(req.file.path);
+    
+                res.json({data: text});
+            } catch (e) {
+                res.json({error: e});
+            }
+        } else {
             res.json({
-                error: e,
+                data: "No file provided"
             })
         }
     }
