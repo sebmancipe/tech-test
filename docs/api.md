@@ -1,5 +1,6 @@
 # Available Endpoints
 The next list are the available endpoints for this project with a bash code to execute them. To use them in the console is required the use of `curl`.
+Remember that the server can be exposed locally in http://localhost:8080 or in https://latii-server.onrender.com, so you can change the URL properly according to your needs.
 
 <sub>The examples are set based on a MacOS device, so the path syntax to the file might change is using Windows.</sub>
 
@@ -10,7 +11,7 @@ GET /status
 ```
 Example request:
 ```bash
-$ curl http://localhost:8080/status
+$ curl https://latii-server.onrender.com/status
 ```
 Example result:
 ```json
@@ -40,7 +41,7 @@ Body:
 ```
 Example request:
 ```bash
-$ curl --form file=@/path/to/file.pdf -u "santiago@latii.com:mDqQGJImF5" http://localhost:8080/convert-to-text
+$ curl --form file=@/path/to/file.pdf -u "santiago@latii.com:mDqQGJImF5" https://latii-server.onrender.com/convert-to-text
 ```
 Example result:
 ```json
