@@ -3,8 +3,6 @@
 
 **/coverage
 
-*.pdf
-
 **.DS_Store
 
 .env

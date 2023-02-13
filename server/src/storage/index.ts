@@ -1,5 +1,6 @@
+import { Request } from "express";
 import { mkdirSync } from "fs";
-import multer from "multer";
+import multer, { FileFilterCallback } from "multer";
 import path from "path";
 
 const fileStorage = multer.diskStorage({
@@ -14,4 +15,21 @@ const fileStorage = multer.diskStorage({
     },
 });
 
-export default multer({storage: fileStorage});
+const fileFilter = (
+    request: Request,
+    file: Express.Multer.File,
+    callback: FileFilterCallback
+): void => {
+    if(file.mimetype === "application/pdf"){
+        callback(null, true);
+    }
+
+    callback(null, false);
+}
+
+const limits = {
+    fileSize: 1048576 //10 MB,
+}
+
+
+export default multer({storage: fileStorage, fileFilter, limits});

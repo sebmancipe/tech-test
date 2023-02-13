@@ -1,4 +1,4 @@
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor, fireEvent } from '@testing-library/react';
 import App from '../App';
 import userEvent from "@testing-library/user-event";
 import MockAdapter from "axios-mock-adapter";
@@ -15,9 +15,22 @@ test('Renders converter page and process a dummy file', async () => {
 
   render(<App />);
 
-  expect(screen.getByText(/PDF to text service/i)).toBeInTheDocument();
+  expect(screen.getByText(/Please, set the next values to use the PDF to text service:/i)).toBeInTheDocument();
   expect(screen.getByText(/Upload to convert/i)).toBeInTheDocument();
-  expect(screen.getByRole("button")).toBeDisabled();
+  expect(screen.getByText("Set")).toBeEnabled();
+
+  const usernameInput = screen.getByTestId("username-input") as HTMLInputElement;
+  const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;
+  const setButton = screen.getByTestId("set-button") as HTMLButtonElement;
+
+  fireEvent.change(usernameInput, {target: {value: 'testmail@gmail.com'}});
+  fireEvent.change(passwordInput, {target: {value: 'a-password'}});
+
+  await act(async () => {
+    await waitFor(() => {
+      userEvent.click(setButton);
+    });
+  });
 
   const fileInput = screen.getByTestId("file-uploader") as HTMLInputElement;
 
@@ -27,7 +40,7 @@ test('Renders converter page and process a dummy file', async () => {
     });
   });
 
-  const uploadButton = screen.getByRole("button");
+  const uploadButton = screen.getByTestId("upload-button");
   expect(uploadButton).toBeEnabled();
   expect(screen.getByRole("progressbar")).toBeInTheDocument();
 
@@ -53,9 +66,22 @@ test('Renders converter page and process a dummy file with error', async () => {
 
   render(<App />);
 
-  expect(screen.getByText(/PDF to text service/i)).toBeInTheDocument();
+  expect(screen.getByText(/Please, set the next values to use the PDF to text service:/i)).toBeInTheDocument();
   expect(screen.getByText(/Upload to convert/i)).toBeInTheDocument();
-  expect(screen.getByRole("button")).toBeDisabled();
+  expect(screen.getByText("Set")).toBeEnabled();
+
+  const usernameInput = screen.getByTestId("username-input") as HTMLInputElement;
+  const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;
+  const setButton = screen.getByTestId("set-button") as HTMLButtonElement;
+
+  fireEvent.change(usernameInput, {target: {value: 'testmail@gmail.com'}});
+  fireEvent.change(passwordInput, {target: {value: 'a-password'}});
+
+  await act(async () => {
+    await waitFor(() => {
+      userEvent.click(setButton);
+    });
+  });
 
   const fileInput = screen.getByTestId("file-uploader") as HTMLInputElement;
 
@@ -65,7 +91,7 @@ test('Renders converter page and process a dummy file with error', async () => {
     });
   });
 
-  const uploadButton = screen.getByRole("button");
+  const uploadButton = screen.getByTestId("upload-button");
   expect(uploadButton).toBeEnabled();
   expect(screen.getByRole("progressbar")).toBeInTheDocument();
 
@@ -76,6 +102,6 @@ test('Renders converter page and process a dummy file with error', async () => {
   });
 
   expect(screen.getByRole("alert")).toBeInTheDocument();
-  expect(screen.getByText(/error message/i)).toBeInTheDocument();
+  expect(screen.getByText(/We can not process your file currently/i)).toBeInTheDocument();
 
 });
