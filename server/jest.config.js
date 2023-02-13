@@ -26,5 +26,10 @@ module.exports = {
       '!<rootDir>/src/**/index.ts',
       '!<rootDir>/src/**/*.{spec}.{ts,js}',
     ],
+    coverageThreshold: {
+      global: {
+        "lines": 75
+      }
+    }
   };
   

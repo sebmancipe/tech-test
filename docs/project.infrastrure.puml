@@ -1,0 +1,15 @@
+@startuml latii-tech-test
+
+!include  https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+
+!include DEVICONS2/express_original.puml
+!include DEVICONS2/react_original.puml
+
+Container(server, "Server", "NodeJS, Express", "Process files returning the text conversion","express_original")
+Container(web, "Web", "NodeJS, ReactJS", "Frontend for users to convert PDF files to text", "react_original")
+
+BiRel(server, web, "Requests and responses for files operations", "HTTP")
+
+@enduml

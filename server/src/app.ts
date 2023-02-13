@@ -5,7 +5,7 @@ import fileHanlder from "./storage";
 
 const app: Express = express();
 
-app.get('/', applicationStatus);
+app.get('/status', applicationStatus);
 app.post('/convert-to-text', fileHanlder.single('file'), convertToText());
 
 export default app;

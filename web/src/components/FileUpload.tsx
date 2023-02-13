@@ -26,7 +26,6 @@ const FileUpload: React.FC = () => {
         setMessage(response.data.data);
     }).catch((e) => {
         setProgress(NO_PROGRESS);
-        console.log(e);
 
         if (e.response && e.response.data && e.response.data.error) {
           setMessage(e.response.data.error);
