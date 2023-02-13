@@ -7,9 +7,7 @@ import { isTesting } from "../utils/environment";
 
 export function convertToText(fileService: FileService = resolveFileService()): ExpressRouteFunc {
     return async function (req: Request, res: Response): Promise<any> {
-        if (isTesting()){
-            res.set('Access-Control-Allow-Origin', 'http://localhost:3000'); //Enable CORS from local
-        }
+        res.set('Access-Control-Allow-Origin', isTesting() ? 'http://localhost:3000' : 'https://latii-web.onrender.com');
 
         if(req.file){
             try {

@@ -14,21 +14,36 @@ This monorepository contains two projects: `/server` and `/web`. In this documen
 ## Index
 
 1. [ Project sample ](#sample)
-2. [ The `/server` ](#server)
-3. [ The `/web` ](#web)
-4. [ Authentication ](#authentication)
-5. [ Security and monitoring ](#security-and-monitoring)
-6. [ Data persistence ](#data-persistence)
-7. [ Improvements ](#improvements)
-8. [ Running the app in local ](#running-the-app)
-8. [ Available endpoints ](#available-endpoints)
-8. [ Testing ](#testing)
+2. [ Using the app in the cloud ](#using-the-app-in-the-cloud)
+3. [ Available endpoints ](#available-endpoints)
+4. [ The `/server` ](#server)
+5. [ The `/web` ](#web)
+6. [ Authentication ](#authentication)
+7. [ Security and monitoring ](#security-and-monitoring)
+8. [ Data persistence ](#data-persistence)
+9. [ Improvements ](#improvements)
+10. [ Running the app in local ](#running-the-app)
+11. [ Testing ](#testing)
 
 ### Sample
 The project looks and uses like shown in the video:
 
 https://user-images.githubusercontent.com/45525889/218515876-5f0405d9-219b-4d53-bb3a-80eba5f6fc99.mov
 
+1. To use the service, you must set a username and password of an authenticated user. You can check the available credentials [here](/docs/credentials.md)
+2. Once both values are written, click the "Set" button
+3. Select the "Choose File" button and select the PDF file you want to convert to text
+4. Click on the "Upload to convert" button to make the request and get the text in the file
+
+## Using the app in the cloud
+
+The server and web applications are deployed to [render](https://render.com/). You can check and follow the steps from above by entering in https://latii-web.onrender.com/. Is recommended the use of Chrome for correct styles loading. 
+
+If you want to request the server directly, you can do it by pointing to https://latii-server.onrender.com.
+
+## Available endpoints
+
+You can find the list of endpoints available in this [section](/docs/api.md).
 
 ### `/server`
 
@@ -101,7 +116,6 @@ Due the time given for the challenge, some feature were missing but can be imple
 - [ ] Implement another authorization and authentication process with JSON Web Tokens or OAuth.
 - [ ] Implement SonarCloud to check bugs and vulnerabilities in code.
 
-
 ## Running the app in local
 
 For a local execution is required the use of NodeJS v18.12.1 and npm 8.19.2. An OS library is needed to the parsing of files `pdftotext`. The next commands are set to be run on MacOS:
@@ -149,10 +163,6 @@ npm run start
 
 And that't it! You can see the available endpoints to test the server in the next section or use it by using the web page located in http://localhost:3000.
 Be aware that you need to login using an authenticated user. Check the list of users available [here](/docs/credentials.md).
-
-## Available endpoints
-
-You can find the list of endpoints available in this [section](/docs/api.md).
 
 ## Testing
 
