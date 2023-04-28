@@ -26,7 +26,9 @@ A layer of security was implemented in the `/convert-to-text` endpoint to avoid 
 
 The strategy is based on a Basic Auth framework, where the client must provide an username and a password that are sent in an `Authorization: Basic` header in the request. Although this authentication process does not consider the Authorization part and is not fully secure due the "plain sending" of the credentials, is good enough if used in a secure medium (like HTTPS). This feature was implemented in the server using the `passport` library. The set of users and passwords to be used in the application can be found [here](/docs/credentials.md).
 
-A better option for Authentication and Authorization flows can be a JSON Web Token strategy or OAuth auhtentication.
+A better option for Authentication and Authorization flows can be a JSON Web Token strategy or OAuth auhtentication. 
+
+This option is currently disabled for production usage.
 
 ## Data persistence
 
